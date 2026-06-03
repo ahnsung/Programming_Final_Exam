@@ -6,6 +6,10 @@ public class Monster : MonoBehaviour
     public float moveSpeed = 2f;
     public int score = 10;
 
+    [Header("Drop")]
+    public GameObject[] dropItemPrefabs;
+    public float dropChance = 0.5f;
+
     private int currentHp;
 
     void Start()
@@ -35,6 +39,20 @@ public class Monster : MonoBehaviour
 
     void Die()
     {
+        TryDropItem();
         Destroy(gameObject);
+    }
+
+    void TryDropItem()
+    {
+        if (dropItemPrefabs == null || dropItemPrefabs.Length == 0) return;
+
+        float randomValue = Random.value;
+
+        if (randomValue <= dropChance)
+        {
+            int randomIndex = Random.Range(0, dropItemPrefabs.Length);
+            Instantiate(dropItemPrefabs[randomIndex], transform.position, Quaternion.identity);
+        }
     }
 }

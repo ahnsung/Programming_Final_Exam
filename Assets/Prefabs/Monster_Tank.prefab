@@ -106,12 +106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948cdc99fa7bdd341bcef180bc22b1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
-  maxHp: 7
-  moveSpeed: 1
-  score: 10
+  data: {fileID: 11400000, guid: df4d3b2db715b634fb9bfecc6ab4666b, type: 2}
   dropItemPrefabs:
   - {fileID: 3038777024677750249, guid: 2a1c832a5d33bc0488f1a2834a98aabf, type: 3}
-  dropChance: 0.5
+  - {fileID: 3038777024677750249, guid: 777663a3065394640964e0be8c76f1e9, type: 3}
 --- !u!61 &-829047313873621638
 BoxCollider2D:
   m_ObjectHideFlags: 0

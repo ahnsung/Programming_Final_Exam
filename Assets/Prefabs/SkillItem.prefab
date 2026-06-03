@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 986754800605879560}
   - component: {fileID: 1529278797399521210}
   m_Layer: 0
-  m_Name: PotionItem
+  m_Name: SkillItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: e52ea25af699fd445b7046374f81a5b9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6592b916f86b19e428db6f6847c7b6dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -179,5 +179,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40244ebc8907064092a9e1f929a2ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropItem
-  itemType: 0
+  itemType: 1
   moveSpeed: 2

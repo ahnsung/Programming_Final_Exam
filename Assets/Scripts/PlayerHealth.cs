@@ -5,9 +5,17 @@ public class PlayerHealth : MonoBehaviour
     public int maxHeart = 5;
     public int currentHeart;
 
+    [Header("Game Over")]
+    public GameObject gameOverPanel;
+
     void Start()
     {
         currentHeart = maxHeart;
+
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(false);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -19,8 +27,6 @@ public class PlayerHealth : MonoBehaviour
             currentHeart = 0;
             GameOver();
         }
-
-        Debug.Log("현재 체력: " + currentHeart);
     }
 
     public void Heal(int amount)
@@ -31,13 +37,15 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHeart = maxHeart;
         }
-
-        Debug.Log("현재 체력: " + currentHeart);
     }
 
     void GameOver()
     {
-        Debug.Log("게임 오버");
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }
+
         Time.timeScale = 0f;
     }
 }

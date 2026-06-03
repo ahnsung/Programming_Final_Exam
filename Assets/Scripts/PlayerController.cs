@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public float fireRate = 0.25f;
 
     private float fireTimer;
-
     private float originalFireRate;
     private float rapidFireTimer;
     private bool isRapidFire;
@@ -32,20 +30,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        float x = 0f;
-
-        if (Keyboard.current != null)
-        {
-            if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
-            {
-                x = -1f;
-            }
-
-            if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
-            {
-                x = 1f;
-            }
-        }
+        float x = Input.GetAxisRaw("Horizontal");
 
         Vector3 pos = transform.position;
         pos.x += x * moveSpeed * Time.deltaTime;
@@ -61,11 +46,7 @@ public class PlayerController : MonoBehaviour
         if (fireTimer >= fireRate)
         {
             fireTimer = 0f;
-
-            if (bulletPrefab != null && firePoint != null)
-            {
-                Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-            }
+            Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         }
     }
 
@@ -78,8 +59,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdateSkillTimer()
     {
-        if (!isRapidFire)
-            return;
+        if (!isRapidFire) return;
 
         rapidFireTimer -= Time.deltaTime;
 

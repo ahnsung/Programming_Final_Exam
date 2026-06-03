@@ -43,11 +43,8 @@ public class InventoryManager : MonoBehaviour
 
     public void UsePotion()
     {
-        if (potionCount <= 0)
-            return;
-
-        if (playerHealth.currentHeart >= playerHealth.maxHeart)
-            return;
+        if (potionCount <= 0) return;
+        if (playerHealth.currentHeart >= playerHealth.maxHeart) return;
 
         potionCount--;
         playerHealth.Heal(1);
@@ -56,8 +53,7 @@ public class InventoryManager : MonoBehaviour
 
     public void UseSkill()
     {
-        if (skillCount <= 0)
-            return;
+        if (skillCount <= 0) return;
 
         skillCount--;
 
@@ -72,9 +68,13 @@ public class InventoryManager : MonoBehaviour
     private void UpdateUI()
     {
         if (potionCountText != null)
+        {
             potionCountText.text = "x " + potionCount;
+        }
 
         if (skillCountText != null)
+        {
             skillCountText.text = "x " + skillCount;
+        }
     }
 }

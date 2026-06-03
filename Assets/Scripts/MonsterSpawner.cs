@@ -23,12 +23,21 @@ public class MonsterSpawner : MonoBehaviour
 
     void SpawnMonster()
     {
-        if (monsterPrefabs.Length == 0) return;
+        if (monsterPrefabs.Length == 0)
+            return;
 
         int randomIndex = Random.Range(0, monsterPrefabs.Length);
         float randomX = Random.Range(-xRange, xRange);
 
         Vector3 spawnPos = new Vector3(randomX, spawnY, 0f);
-        Instantiate(monsterPrefabs[randomIndex], spawnPos, Quaternion.identity);
+
+        GameObject monster =
+            Instantiate(
+                monsterPrefabs[randomIndex],
+                spawnPos,
+                Quaternion.Euler(0f, 0f, 180f)
+            );
+
+        monster.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
     }
 }

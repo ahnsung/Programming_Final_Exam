@@ -19,7 +19,7 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
 
         if (transform.position.y < -6f)
         {

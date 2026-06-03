@@ -21,17 +21,12 @@ public class DropItem : MonoBehaviour
 
         if (player != null)
         {
-            if (itemType == ItemType.Potion)
-            {
-                player.Heal(1);
-                Debug.Log("포션 획득: 체력 1 회복");
-            }
-            else if (itemType == ItemType.Skill)
-            {
-                Debug.Log("스킬 아이템 획득");
-            }
+            bool added = InventoryManager.Instance.AddItem(itemType);
 
-            Destroy(gameObject);
+            if (added)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

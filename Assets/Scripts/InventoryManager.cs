@@ -1,64 +1,80 @@
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
+    [Header("Player")]
     public PlayerHealth playerHealth;
-    public List<ItemType> items = new List<ItemType>();
+    public PlayerController playerController;
 
-    public InventorySlot[] slots;
+    [Header("UI")]
+    public TMP_Text potionCountText;
+    public TMP_Text skillCountText;
+
+    private int potionCount = 0;
+    private int skillCount = 0;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public bool AddItem(ItemType item)
+    private void Start()
     {
-        if (items.Count >= slots.Length)
+        UpdateUI();
+    }
+
+    public bool AddItem(ItemType itemType)
+    {
+        if (itemType == ItemType.Potion)
         {
-            Debug.Log("인벤토리가 가득 찼습니다.");
-            return false;
+            potionCount++;
+        }
+        else if (itemType == ItemType.Skill)
+        {
+            skillCount++;
         }
 
-        items.Add(item);
         UpdateUI();
-
-        Debug.Log(item + " 획득");
         return true;
     }
 
-    public void UseItem(int index)
+    public void UsePotion()
     {
-        if (index < 0 || index >= items.Count)
+        if (potionCount <= 0)
             return;
 
-        ItemType item = items[index];
+        if (playerHealth.currentHeart >= playerHealth.maxHeart)
+            return;
 
-        if (item == ItemType.Potion)
-        {
-            playerHealth.Heal(1);
-            Debug.Log("포션 사용: 체력 1 회복");
-        }
-        else if (item == ItemType.Skill)
-        {
-            Debug.Log("스킬 아이템 사용");
-        }
-
-        items.RemoveAt(index);
+        potionCount--;
+        playerHealth.Heal(1);
         UpdateUI();
     }
 
-    void UpdateUI()
+    public void UseSkill()
     {
-        for (int i = 0; i < slots.Length; i++)
+        if (skillCount <= 0)
+            return;
+
+        skillCount--;
+
+        if (playerController != null)
         {
-            if (i < items.Count)
-                slots[i].SetItem(items[i]);
-            else
-                slots[i].ClearSlot();
+            playerController.ActivateRapidFire(5f);
         }
+
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        if (potionCountText != null)
+            potionCountText.text = "x " + potionCount;
+
+        if (skillCountText != null)
+            skillCountText.text = "x " + skillCount;
     }
 }

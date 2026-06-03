@@ -7,7 +7,7 @@ public class DropItem : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+        transform.position += Vector3.down * moveSpeed * Time.deltaTime;
 
         if (transform.position.y < -6f)
         {
